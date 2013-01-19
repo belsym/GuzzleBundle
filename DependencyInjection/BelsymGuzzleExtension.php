@@ -28,7 +28,7 @@ class BelsymGuzzleExtension extends Extension
 
         if ($config['logging']) {
             $container->findDefinition('guzzle.data_collector')
-                ->addTag('data_collector', array('template' => 'DdeboerGuzzleBundle:Collector:guzzle', 'id' => 'guzzle'));
+                ->addTag('data_collector', array('template' => 'BelsymGuzzleBundle:Collector:guzzle', 'id' => 'guzzle'));
         }
     }
 }
