@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Ddeboer\GuzzleBundle\DataCollector;
+namespace Belsym\GuzzleBundle\DataCollector;
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;

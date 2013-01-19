@@ -1,6 +1,6 @@
 <?php
 
-namespace Ddeboer\GuzzleBundle\DependencyInjection;
+namespace Belsym\GuzzleBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\Definition\Processor;
 
-class DdeboerGuzzleExtension extends Extension
+class BelsymGuzzleExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
