@@ -1,11 +1,15 @@
 {
-    "name": "ddeboer/guzzle-bundle",
+    "name": "belsym/guzzle-bundle",
     "type": "symfony-bundle",
-    "description": "This Bundle provide integration for guzzle http client to access RESTful API's with Symfony2",
+    "description": "This bundle provides integration of the guzzle library to Symfony2 to facilitate easy access to RESTful API's",
     "keywords": ["http", "rest", "web service", "curl", "client", "HTTP client", "guzzle", "api"],
-    "homepage": "https://github.com/ddeboer/GuzzleBundle",
+    "homepage": "https://github.com/belsym/GuzzleBundle",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Matt Keeble",
+            "email": "matt.keeble@gmail.com"
+        }
         {
             "name": "David de Boer"
         },
@@ -25,12 +29,12 @@
     "require": {
         "php":                            ">=5.3.2",
         "symfony/symfony":                ">=2.0,<2.2",
-        "guzzle/guzzle":                  "*"
+        "guzzle/guzzle":                  "3.*@stable"
     },
 
     "autoload": {
-        "psr-0": { "Ddeboer\\GuzzleBundle": "" }
+        "psr-0": { "Belsym\\GuzzleBundle": "" }
     },
 
-    "target-dir": "Ddeboer/GuzzleBundle"
+    "target-dir": "Belsym/GuzzleBundle"
 }
