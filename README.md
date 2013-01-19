@@ -1,7 +1,16 @@
-DdeboerGuzzleBundle
+BelsymGuzzleBundle
 ===================
 
-DdeboerGuzzleBundle is a Symfony2 bundle for integrating the [Guzzle PHP library](http://github.com/guzzle/guzzle) in your project.
+BelsymGuzzleBundle is a fork of the work undertaken on [DdeboerGuzzleBundle](https://github.com/ddeboer/GuzzleBundle).
+
+It is a Symfony2 bundle for integrating the [Guzzle PHP library](http://github.com/guzzle/guzzle) in your project.
+
+I have forked this project and rebranded as BelsymGuzzleBundle as the original project has not had any updates for over 6 months and does not actually work with the latest version of Guzzle (3.0) at all due to some fundamental library structure changes.
+
+The changes within this bundle from the original are two-fold:
+
+1. Update the project to work with the latest version of Guzzle (3.0)
+2. Introduce a method of defining the Guzzle service descriptions, clients, commands etc using the Symfony2 Dependency Injection configuration system.
 
 ## Installation
 
