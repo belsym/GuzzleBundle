@@ -27,12 +27,12 @@ class BelsymGuzzleExtension extends Extension
         if(isset($config['service']['configuration']['configuration_file']))
         {
             $container->setParameter('guzzle.service.configuration',
-                            $config['service']['configuration']['configuration_file']);
+                $config['service']['configuration']['configuration_file']);
         }
         else
         {
             $container->setParameter('guzzle.service.configuration',
-                    $config['service']['configuration']);
+                $config['service']['configuration']);
         }
 
         $container->setParameter('guzzle.service.global_configuration', array());
