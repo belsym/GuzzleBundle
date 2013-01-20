@@ -17,14 +17,25 @@ class BelsymGuzzleExtension extends Extension
             $container,
             new FileLocator(__DIR__.'/../Resources/config')
         );
+
         $loader->load('services.xml');
 
         $processor = new Processor();
         $configuration = new Configuration($container->getParameter('kernel.debug'));
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $container->setParameter('guzzle.service_builder.configuration_file',
-                $config['service_builder']['configuration_file']);
+        if(isset($config['service']['configuration']['configuration_file']))
+        {
+            $container->setParameter('guzzle.service.configuration',
+                            $config['service']['configuration']['configuration_file']);
+        }
+        else
+        {
+            $container->setParameter('guzzle.service.configuration',
+                    $config['service']['configuration']);
+        }
+
+        $container->setParameter('guzzle.service.global_configuration', array());
 
         if ($config['logging']) {
             $container->findDefinition('guzzle.data_collector')

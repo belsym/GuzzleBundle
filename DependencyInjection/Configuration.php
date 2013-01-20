@@ -4,6 +4,7 @@ namespace Belsym\GuzzleBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class Configuration implements ConfigurationInterface
 {
@@ -26,13 +27,32 @@ class Configuration implements ConfigurationInterface
         $builder
             ->root('guzzle')
                 ->children()
-                    ->arrayNode('service_builder')
+                    ->arrayNode('service')
                         ->children()
-                            ->scalarNode('class')
-                                ->defaultValue('Guzzle\Service\Builder\ServiceBuilder')
-                            ->end()
-                            ->scalarNode('configuration_file')
-                                ->defaultValue('%kernel.root_dir%/config/webservices.xml')
+                            ->arrayNode('configuration')
+                                ->beforeNormalization()
+                                ->ifString()
+                                    ->then(function($v){
+                                        return array('configuration_file' => $v);
+                                    })
+                                ->end()
+                                ->children()
+                                    ->arrayNode('includes')
+                                        ->beforeNormalization()
+                                        ->ifNull()
+                                            ->thenEmptyArray()
+                                        ->end()
+                                        ->prototype('scalar')->end()
+                                    ->end()
+                                    ->arrayNode('services')
+                                        ->beforeNormalization()
+                                        ->ifNull()
+                                            ->thenEmptyArray()
+                                        ->end()
+                                        ->prototype('array')->end()
+                                    ->end()
+                                    ->scalarNode('configuration_file')->end()
+                                ->end()
                             ->end()
                         ->end()
                     ->end()
