@@ -26,6 +26,7 @@
                  factory-class="%guzzle.service_builder_factory.class%"
                  factory-method="factory">
             <argument>%guzzle.service.configuration%</argument>
+            <argument type="collection" on-invalid="ignore">%guzzle.service.global_configuration%</argument>
         </service>
 
         <!--<service id="guzzle.plugin.service_builder" class="%guzzle.plugin.service_builder.class%" public="false">-->
