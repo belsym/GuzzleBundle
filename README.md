@@ -41,12 +41,12 @@ Add the following to your composer.json file:
 
 ``` json
 {
-    // ...
+    # ...
     "require": {
-        // ...
+        # ...
         "belsym/GuzzleBundle": "dev-master"
     }
-    // ...
+    # ...
 }
 ```
 From the command line (in your project root of course), type `php composer.phar install` and wait for the dependencies to be resolved. Once done, and the cache has been cleared, you can use the bundle and move onto configuration
@@ -132,7 +132,7 @@ belsym_guzzle:
 The file at the location entered must be either a `.json`, `.js` or `.php` file. See the [Guzzle documentation](http://guzzlephp.org/tour/using_services.html#instantiating-web-service-clients-using-a-servicebuilder).
 
 ``` json
-// app/config/webservices.json
+# app/config/webservices.json
 {
     "includes": [],
     "services": {
