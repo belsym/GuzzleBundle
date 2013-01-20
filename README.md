@@ -144,7 +144,7 @@ The file at the location entered must be either a `.json`, `.js` or `.php` file.
                 "baseUrl": "https://unfuddle.com/",
                 "description": "Bug Tracking and source code integration for the masses",
             }
-        }
+        },
         "httpbin": {
             "extends": "abstract.default_client",
             "params": {
