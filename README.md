@@ -1,33 +1,31 @@
 BelsymGuzzleBundle
 ===================
 
-BelsymGuzzleBundle is a fork of the work undertaken on [DdeboerGuzzleBundle](https://github.com/ddeboer/GuzzleBundle).
+BelsymGuzzleBundle is a fork of the work undertaken on [DdeboerGuzzleBundle](https://github.com/ddeboer/GuzzleBundle). It is a Symfony2 bundle for integrating the [Guzzle PHP library](http://github.com/guzzle/guzzle) in your project.
 
-It is a Symfony2 bundle for integrating the [Guzzle PHP library](http://github.com/guzzle/guzzle) in your project.
+I made the decision to not submit pull requests and re-release it as BelsymGuzzleBundle as no development appeared to have been done on Ddeboer's version in a few months at the time of forking and it wasn't in a working state 'out of the box'. I must give full credit and thanks to David De Boer for his work on his bundle though as I would not have figured it all out without his insights!
 
-I have forked this project and rebranded as BelsymGuzzleBundle as the original project has not had any updates for over 6 months and does not actually work with the latest version of Guzzle (3.0) at all due to some fundamental library structure changes.
+I have made some fundamental changes to the bundle code to get it working with Guzzle 3.*. The upgrade of Guzzle to version 3 introduced a number of changes that broke BC with earlier versions completely.
 
 The changes within this bundle from the original are two-fold:
 
 1. Update the project to work with the latest version of Guzzle (3.0)
 2. Introduce a method of defining the Guzzle service descriptions, clients, commands etc using the Symfony2 Dependency Injection configuration system.
 
-# TODO
+Next Steps
+----------
 
-Updates that need to be made to the documentation
+- add command configuration
+- add operation and response object structure
 
-* Update installation to add composer instructions and make them the preferred choice
-* Update examples and demo to reflect proper configuration construction now
-
-
-## Installation
+Installation
+------------
 
 Installation is pretty easy, and far easier if you take the composer route (hint!)
 
 1. Download this Bundle
 2. Configure the Autoloader (only necessary if you **didn't** install using composer)
 3. Enable the bundle (only necessary if you **didn't** install using composer)
-4. Configure the Bundle
 
 ### Step 1: Download this Bundle
 
@@ -113,7 +111,8 @@ public function registerBundles()
 }
 ```
 
-### Step 4: Configure the BelsymGuzzleBundle
+Configuration
+-------------
 
 Configuration can be added in a number of ways. You are able to use a Guzzle service configuration file to make your configurations more portable or you can define your services using YAML markup using the container configuration system built into Symfony.
 
@@ -124,8 +123,7 @@ Add a configuration containing the path to a valid guzzle service builder config
 ``` yaml
 # app/config/config.yml
 belsym_guzzle:
-    service:
-        configuration: "%kernel.root_dir%/config/webservices.json"
+    configuration: "%kernel.root_dir%/config/webservices.json"
 ```
 
 The file at the location entered must be either a `.json`, `.js` or `.php` file. See the [Guzzle documentation](http://guzzlephp.org/tour/using_services.html#instantiating-web-service-clients-using-a-servicebuilder).
@@ -156,15 +154,34 @@ The file at the location entered must be either a `.json`, `.js` or `.php` file.
 }
 ```
 
-Note: these are only examples - don't expect any actual results using the configurations in this documentation!
-
 #### Using the configuration system
 
-This bit's coming soon! It's not implemented yet...
+In order to define your services through the Symfony Config component, instead of adding a filepath as the value of `configuration`, you should create `configuration` as an array containing a `services` array
 
-## Going Further
+The main benefit of this is to add easily overridden configurations for different environments. For instance, you might want to use an alternative set of parameters when connecting to a service from your dev or test environments rather than production. Using the configuration files offers a method of doing that.
 
-I will be updating these docs as I progress this bundle further.
+**Note:** It's currently not possible to have a mixture of file and configured services. You must choose one strategy or the other
+
+```yaml
+belsym_guzzle:
+    configuration:
+        services:
+            abstract.default_client:
+                class: "Guzzle\\Service\\Client"
+            unfuddle:
+                extends: "abstract.default_client"
+                params:
+                    apiVersion: "1.0"
+                    baseUrl: "https://unfuddle.com/"
+                    description: "Bug Tracking and source code integration for the masses"
+            httpbin:
+                extends: "abstract.default_client"
+                params:
+                    first: "one thing"
+                    second: "or another"
+```
+
+**Note:** The examples shown here are just examples. Don't expect any actual results using the configurations in this documentation!
 
 
 ## License
