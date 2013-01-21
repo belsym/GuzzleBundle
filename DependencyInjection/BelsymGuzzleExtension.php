@@ -24,15 +24,15 @@ class BelsymGuzzleExtension extends Extension
         $configuration = new Configuration($container->getParameter('kernel.debug'));
         $config = $processor->processConfiguration($configuration, $configs);
 
-        if(isset($config['service']['configuration']['configuration_file']))
+        if(isset($config['configuration']['configuration_file']) && (!isset($config['configuration']['services']) || empty($config['configuration']['services'])))
         {
             $container->setParameter('guzzle.service.configuration',
-                $config['service']['configuration']['configuration_file']);
+                $config['configuration']['configuration_file']);
         }
         else
         {
             $container->setParameter('guzzle.service.configuration',
-                $config['service']['configuration']);
+                $config['configuration']);
         }
 
         $container->setParameter('guzzle.service.global_configuration', array());
